@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fluxo Financeiro Sharks</title>
+
+    <!-- APP MOBILE (iPhone / Android) -->
+    <meta name="theme-color" content="#0a0a0a">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ===================== -->
+    <!-- HEADER -->
+    <!-- ===================== -->
+
+    <header>
+        <h1>FLUXO FINANCEIRO SHARKS</h1>
+        <p>Feito por Atlas</p>
+    </header>
+
+    <!-- ===================== -->
+    <!-- DADOS DA COMPRA -->
+    <!-- ===================== -->
+
+    <section class="card">
+
+        <h2>Dados da Compra</h2>
+
+        <div class="campo">
+            <label>Valor de Avaliação do Imóvel</label>
+            <input id="valorImovel" type="text" inputmode="numeric" placeholder="R$ 0,00">
+        </div>
+
+        <div class="campo">
+            <label>Renda Bruta Familiar</label>
+            <input id="renda" type="text" inputmode="numeric" placeholder="R$ 0,00">
+        </div>
+
+        <div class="campo">
+            <label>ATO</label>
+            <input id="ato" type="text" inputmode="numeric" placeholder="R$ 0,00">
+        </div>
+
+        <div class="campo">
+            <label>FGTS</label>
+            <input id="fgts" type="text" inputmode="numeric" placeholder="R$ 0,00">
+        </div>
+
+        <div class="campo">
+            <label>Parcelamento da Entrada</label>
+            <input id="parcelas" type="number" min="1" placeholder="Ex: 36">
+        </div>
+
+        <!-- ===================== -->
+        <!-- ANUAIS -->
+        <!-- ===================== -->
+
+        <div class="campo">
+            <label>Anuais (valor total)</label>
+            <input id="anuaisValor" type="text" inputmode="numeric" placeholder="R$ 0,00">
+        </div>
+
+        <div class="campo">
+            <label>Quantidade de vezes (Anuais)</label>
+            <input id="anuaisVezes" type="number" min="1" placeholder="Ex: 2">
+        </div>
+
+    </section>
+
+    <!-- ===================== -->
+    <!-- RESULTADO -->
+    <!-- ===================== -->
+
+    <section class="card resultado">
+
+        <h2>Resultado da Simulação</h2>
+
+        <div class="resultado-grid">
+
+            <div class="box">
+                <span>Faixa MCMV</span>
+                <strong id="faixa">-</strong>
+            </div>
+
+            <div class="box">
+                <span>Valor Financiado</span>
+                <strong id="financiado">R$ 0,00</strong>
+            </div>
+
+            <div class="box">
+                <span>% Financiado</span>
+                <strong id="percFinanciado">0%</strong>
+            </div>
+
+            <div class="box">
+                <span>Entrada</span>
+                <strong id="entrada">R$ 0,00</strong>
+            </div>
+
+            <div class="box">
+                <span>% Entrada</span>
+                <strong id="percEntrada">0%</strong>
+            </div>
+
+            <div class="box">
+                <span>Entrada Restante</span>
+                <strong id="restante">R$ 0,00</strong>
+            </div>
+
+            <div class="box destaque">
+                <span>Valor da Parcela</span>
+                <strong id="valorParcela">R$ 0,00</strong>
+            </div>
+
+            <!-- ANUAIS RESUMO -->
+            <div class="box">
+                <span>Anuais</span>
+                <strong id="anuaisResumo">-</strong>
+            </div>
+
+        </div>
+
+        <!-- BARRA -->
+        <div class="barra">
+            <div id="barraFinanciamento"></div>
+        </div>
+
+        <div class="textoBarra">
+            <span id="textoBarra">0% Financiado</span>
+        </div>
+
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
