@@ -1,192 +1,148 @@
 // =========================================
 // FLUXO FINANCEIRO SHARKS
-// Feito por Atlas
 // =========================================
-
-// ---------- CONFIG ----------
 
 const CONFIG = {
     multiplicadorRenda: 60,
     percentualMaximo: 0.80
 };
 
-// ---------- CAMPOS ----------
-
+// INPUTS
 const valorImovel = document.getElementById("valorImovel");
 const renda = document.getElementById("renda");
 const ato = document.getElementById("ato");
 const fgts = document.getElementById("fgts");
 const parcelas = document.getElementById("parcelas");
-
-// ANUAIS
 const anuaisValor = document.getElementById("anuaisValor");
 const anuaisVezes = document.getElementById("anuaisVezes");
-const anuaisResumo = document.getElementById("anuaisResumo");
 
-// ---------- RESULTADOS ----------
-
+// OUTPUTS
 const faixa = document.getElementById("faixa");
 const financiado = document.getElementById("financiado");
-const percFinanciado = document.getElementById("percFinanciado");
 const entrada = document.getElementById("entrada");
-const percEntrada = document.getElementById("percEntrada");
 const restante = document.getElementById("restante");
 const valorParcela = document.getElementById("valorParcela");
 
 const barra = document.getElementById("barraFinanciamento");
 const textoBarra = document.getElementById("textoBarra");
 
-// =========================================
-// FORMATAÇÃO
-// =========================================
+// SMALL UI
+const percFinanciadoSmall = document.getElementById("percFinanciadoSmall");
+const percEntradaSmall = document.getElementById("percEntradaSmall");
+const parcelasSmall = document.getElementById("parcelasSmall");
 
-function formatarMoeda(valor) {
-    valor = valor.replace(/\D/g, "");
-    if (valor === "") valor = "0";
+// ANUAIS
+const anuaisResumo = document.getElementById("anuaisResumo");
+const anuaisDetalhe = document.getElementById("anuaisDetalhe");
 
-    return (parseInt(valor) / 100).toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    });
-}
+// =========================================
+// FORMAT
+// =========================================
 
 function numero(campo) {
-    return Number(campo.value.replace(/\D/g, "")) / 100;
+    return Number(campo.value.replace(/\D/g, "")) / 100 || 0;
 }
 
-function moeda(valor) {
-    return valor.toLocaleString("pt-BR", {
+function moeda(v) {
+    return v.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL"
     });
 }
 
-// =========================================
-// MÁSCARA
-// =========================================
-
-function aplicarMascara(input) {
-    input.addEventListener("input", function () {
-        this.value = formatarMoeda(this.value);
+function formatar(input) {
+    input.addEventListener("input", () => {
+        let v = input.value.replace(/\D/g, "");
+        input.value = (Number(v) / 100).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
         calcular();
     });
 }
 
-aplicarMascara(valorImovel);
-aplicarMascara(renda);
-aplicarMascara(ato);
-aplicarMascara(fgts);
-aplicarMascara(anuaisValor);
+// máscaras
+[valorImovel, renda, ato, fgts, anuaisValor].forEach(formatar);
 
 // =========================================
-// FAIXA MCMV
+// LÓGICA
 // =========================================
 
-function calcularFaixa(renda) {
+function faixaMCMV(renda) {
     if (renda <= 3200) return "Faixa 1";
     if (renda <= 5000) return "Faixa 2";
     if (renda <= 9600) return "Faixa 3";
     if (renda <= 13000) return "Faixa 4";
-    return "Fora do MCMV";
+    return "Fora";
+}
+
+function financiamento(imovel, renda) {
+    return Math.min(
+        renda * CONFIG.multiplicadorRenda,
+        imovel * CONFIG.percentualMaximo
+    );
 }
 
 // =========================================
-// FINANCIAMENTO
-// =========================================
-
-function calcularFinanciamento(imovel, renda) {
-    const pelaRenda = renda * CONFIG.multiplicadorRenda;
-    const limite = imovel * CONFIG.percentualMaximo;
-
-    return Math.min(pelaRenda, limite);
-}
-
-// =========================================
-// CÁLCULO PRINCIPAL
+// CALCULO PRINCIPAL
 // =========================================
 
 function calcular() {
 
     const imovel = numero(valorImovel);
-    const rendaBruta = numero(renda);
-    const valorAto = numero(ato);
-    const valorFgts = numero(fgts);
+    const rendaV = numero(renda);
+    const atoV = numero(ato);
+    const fgtsV = numero(fgts);
 
     const qtdParcelas = Number(parcelas.value) || 1;
 
-    // ANUAIS
     const valorAnuais = numero(anuaisValor);
-    const qtdAnuais = Number(anuaisVezes.value) || 1;
+    const qtdAnuais = Number(anuaisVezes.value) || 0;
+
     const totalAnuais = valorAnuais * qtdAnuais;
 
-    const faixaAtual = calcularFaixa(rendaBruta);
+    const fin = financiamento(imovel, rendaV);
+    const entradaV = Math.max(0, imovel - fin);
 
-    const valorFinanciado = calcularFinanciamento(imovel, rendaBruta);
+    const percFin = imovel ? (fin / imovel) * 100 : 0;
+    const percEnt = imovel ? (entradaV / imovel) * 100 : 0;
 
-    const valorEntrada = Math.max(0, imovel - valorFinanciado);
+    let saldo = entradaV - atoV - fgtsV - totalAnuais;
+    if (saldo < 0) saldo = 0;
 
-    const percentualFinanciado =
-        imovel > 0 ? (valorFinanciado / imovel) * 100 : 0;
+    const parcela = saldo / qtdParcelas;
 
-    const percentualEntrada =
-        imovel > 0 ? (valorEntrada / imovel) * 100 : 0;
+    // UI principal
+    faixa.textContent = faixaMCMV(rendaV);
+    financiado.textContent = moeda(fin);
+    entrada.textContent = moeda(entradaV);
+    restante.textContent = moeda(saldo);
 
-    // SALDO ENTRADA
-    let saldoEntrada =
-        valorEntrada
-        - valorAto
-        - valorFgts
-        - totalAnuais;
+    valorParcela.textContent = moeda(parcela);
 
-    if (saldoEntrada < 0) saldoEntrada = 0;
+    barra.style.width = percFin + "%";
+    textoBarra.textContent = percFin.toFixed(1) + "%";
 
-    const parcela = saldoEntrada / qtdParcelas;
+    percFinanciadoSmall.textContent = percFin.toFixed(1) + "%";
+    percEntradaSmall.textContent = percEnt.toFixed(1) + "%";
+
+    parcelasSmall.textContent = qtdParcelas + "x";
 
     // =========================================
-    // ATUALIZA UI
+    // ANUAIS FINAL LIMPO (SEM BUG)
     // =========================================
 
-    faixa.textContent = faixaAtual;
-    financiado.textContent = moeda(valorFinanciado);
-    entrada.textContent = moeda(valorEntrada);
-    restante.textContent = moeda(saldoEntrada);
+    anuaisResumo.textContent = moeda(totalAnuais);
 
-    percFinanciado.textContent = percentualFinanciado.toFixed(1) + "%";
-    percEntrada.textContent = percentualEntrada.toFixed(1) + "%";
+    const valorUnitario = qtdAnuais > 0 ? (totalAnuais / qtdAnuais) : 0;
 
-    barra.style.width = percentualFinanciado + "%";
-
-    textoBarra.textContent =
-        percentualFinanciado.toFixed(1) +
-        "% Financiado | " +
-        percentualEntrada.toFixed(1) +
-        "% Entrada";
-
-    // 🔥 ALTERAÇÃO FEITA AQUI (VALOR DA PARCELA)
-    valorParcela.textContent =
-        qtdParcelas + "x de " + moeda(parcela);
-
-    // ANUAIS RESUMO
-    anuaisResumo.textContent =
-        qtdAnuais + "x de " + moeda(valorAnuais) +
-        " = " + moeda(totalAnuais);
+    anuaisDetalhe.textContent =
+        qtdAnuais + "x de " + moeda(valorUnitario);
 }
 
-// =========================================
-// EVENTOS
-// =========================================
-
+// eventos
 parcelas.addEventListener("input", calcular);
 anuaisVezes.addEventListener("input", calcular);
 
-// =========================================
-// INICIALIZAÇÃO
-// =========================================
-
-valorImovel.value = formatarMoeda("0");
-renda.value = formatarMoeda("0");
-ato.value = formatarMoeda("0");
-fgts.value = formatarMoeda("0");
-anuaisValor.value = formatarMoeda("0");
-
+// init
 calcular();
