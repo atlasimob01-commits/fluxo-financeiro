@@ -146,3 +146,13 @@ anuaisVezes.addEventListener("input", calcular);
 
 // init
 calcular();
+
+// =========================================
+// IMPRESSÃO
+// =========================================
+
+const btnImprimir = document.getElementById("btnImprimir");
+
+btnImprimir.addEventListener("click", () => {
+    window.print();
+});
