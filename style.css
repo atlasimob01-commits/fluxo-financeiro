@@ -221,4 +221,61 @@ header p {
     .box strong {
         font-size: 16px;
     }
+}/* =========================
+   BOTÃO IMPRIMIR
+========================= */
+
+.acoes {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+#btnImprimir {
+    background: #003b73;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 30px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+#btnImprimir:hover {
+    background: #00509c;
+}
+
+/* =========================
+   IMPRESSÃO
+========================= */
+
+@media print {
+
+    body {
+        background: #fff;
+    }
+
+    header p,
+    .acoes {
+        display: none;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    .campo input {
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .barra {
+        margin-top: 20px;
+    }
+
 }
