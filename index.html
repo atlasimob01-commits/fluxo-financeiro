@@ -2,60 +2,105 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Fluxo Financeiro Sharks</title>
 
     <meta name="theme-color" content="#0a0a0a">
+
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <header>
-        <h1>FLUXO FINANCEIRO SHARKS</h1>
-        <p>Feito por Atlas</p>
+    <header class="header-sharks">
+
+        <div class="header-info">
+
+            <h1>FLUXO FINANCEIRO SHARKS</h1>
+
+            <p>Sistema de Simulação Financeira</p>
+
+        </div>
+
     </header>
 
     <section class="card">
 
         <h2>Dados da Compra</h2>
 
-        <div class="campo">
-            <label>Valor do Imóvel</label>
-            <input id="valorImovel" type="text" inputmode="numeric">
+        <div class="campo campo-inteiro">
+
+            <label>
+                Nome do Cliente
+                <small>(Opcional)</small>
+            </label>
+
+            <input
+                id="nomeCliente"
+                type="text"
+                placeholder="Digite o nome do cliente">
+
         </div>
 
-        <div class="campo">
-            <label>Renda Bruta</label>
-            <input id="renda" type="text" inputmode="numeric">
-        </div>
+        <div class="campos-grid">
 
-        <div class="campo">
-            <label>ATO</label>
-            <input id="ato" type="text" inputmode="numeric">
-        </div>
+            <div class="campo">
+                <label>Valor do Imóvel</label>
+                <input id="valorImovel"
+                       type="text"
+                       inputmode="numeric">
+            </div>
 
-        <div class="campo">
-            <label>FGTS</label>
-            <input id="fgts" type="text" inputmode="numeric">
-        </div>
+            <div class="campo">
+                <label>Renda Bruta</label>
+                <input id="renda"
+                       type="text"
+                       inputmode="numeric">
+            </div>
 
-        <div class="campo">
-            <label>Parcelas da Entrada</label>
-            <input id="parcelas" type="number" min="1">
-        </div>
+            <div class="campo">
+                <label>ATO</label>
+                <input id="ato"
+                       type="text"
+                       inputmode="numeric">
+            </div>
 
-        <div class="campo">
-            <label>Anuais (valor total)</label>
-            <input id="anuaisValor" type="text" inputmode="numeric">
-        </div>
+            <div class="campo">
+                <label>FGTS</label>
+                <input id="fgts"
+                       type="text"
+                       inputmode="numeric">
+            </div>
 
-        <div class="campo">
-            <label>Quantidade de Anuais</label>
-            <input id="anuaisVezes" type="number" min="1">
+            <div class="campo">
+                <label>Parcelamento</label>
+                <input id="parcelas"
+                       type="number"
+                       min="1">
+            </div>
+
+            <div class="campo campo-anual">
+                <label>Valor da Anual</label>
+                <input id="anuaisValor"
+                       type="text"
+                       inputmode="numeric">
+            </div>
+
+            <div class="campo campo-pequeno">
+                <label>Anuais</label>
+                <input id="anuaisVezes"
+                       type="number"
+                       min="1">
+            </div>
+
         </div>
 
     </section>
@@ -67,60 +112,141 @@
         <div class="resultado-grid">
 
             <div class="box">
+
                 <span>Faixa MCMV</span>
+
                 <strong id="faixa">-</strong>
+
             </div>
 
             <div class="box">
+
                 <span>Financiado</span>
+
                 <strong id="financiado">R$ 0,00</strong>
+
                 <small id="percFinanciadoSmall"></small>
+
             </div>
 
             <div class="box">
+
                 <span>Entrada</span>
+
                 <strong id="entrada">R$ 0,00</strong>
+
                 <small id="percEntradaSmall"></small>
+
             </div>
 
             <div class="box">
+
                 <span>Restante</span>
+
                 <strong id="restante">R$ 0,00</strong>
+
             </div>
 
             <div class="box destaque">
+
                 <span>Parcela</span>
+
                 <strong id="valorParcela">R$ 0,00</strong>
+
                 <small id="parcelasSmall"></small>
+
             </div>
 
             <div class="box">
+
                 <span>Anuais</span>
+
                 <strong id="anuaisResumo">R$ 0,00</strong>
+
                 <small id="anuaisDetalhe">0x</small>
+
             </div>
 
         </div>
 
         <div class="barra">
+
             <div id="barraFinanciamento"></div>
+
         </div>
 
         <div class="textoBarra">
+
             <span id="textoBarra">0%</span>
+
         </div>
 
-        <!-- BOTÕES -->
         <div class="acoes">
-            <button id="btnImprimir" type="button">
-                🖨️ Imprimir Simulação
+
+            <button id="btnWhatsapp" type="button">
+                📤 Mandar PDF via WhatsApp
             </button>
+
+            <button id="btnPdf" type="button">
+                📄 PDF
+            </button>
+
+            <button id="btnImprimir" type="button">
+                🖨️ Imprimir
+            </button>
+
         </div>
 
     </section>
 
 </div>
 
+<!-- ========================================= -->
+<!-- MODAL WHATSAPP -->
+<!-- ========================================= -->
+
+<div id="modalWhatsapp" class="modalWhatsapp">
+
+    <div class="modalWhatsappConteudo">
+
+        <h2>📤 Enviar PDF via WhatsApp</h2>
+
+        <div class="campoTelefone">
+
+            <span>📱</span>
+
+            <input
+                id="telefoneWhatsapp"
+                type="tel"
+                placeholder="(11) 99999-9999">
+
+        </div>
+
+        <div class="modalBotoes">
+
+            <button
+                id="btnCancelarWhatsapp"
+                type="button">
+
+                Cancelar
+
+            </button>
+
+            <button
+                id="btnEnviarWhatsapp"
+                type="button">
+
+                Enviar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="script.js"></script>
 
 </body>
