@@ -1,281 +1,597 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #eef2f7;
-    color: #222;
-}
-
-.container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-header h1 {
-    color: #003b73;
-    font-size: 2rem;
-    font-weight: 700;
-}
-
-header p {
-    color: #777;
-    margin-top: 6px;
-}
-
-.card {
-    background: #fff;
-    border-radius: 18px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.08);
-}
-
-.card h2 {
-    color: #003b73;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #e8e8e8;
-    padding-bottom: 10px;
-}
-
-.campo {
-    margin-bottom: 18px;
-}
-
-.campo label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.campo input {
-    width: 100%;
-    height: 50px;
-    border: 1px solid #d5d5d5;
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 18px;
-    transition: .2s;
-}
-
-.campo input:focus {
-    outline: none;
-    border-color: #003b73;
-    box-shadow: 0 0 8px rgba(0,59,115,.15);
-}
-
-.resultado-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 18px;
-}
-
-.box {
-    background: #f8f9fb;
-    border-left: 5px solid #003b73;
-    border-radius: 12px;
-    padding: 18px;
-}
-
-.box span {
-    display: block;
-    color: #666;
-    margin-bottom: 8px;
-}
-
-.box strong {
-    font-size: 24px;
-    color: #003b73;
-}
-
-.destaque {
-    border-left-color: #28a745;
-}
-
-.destaque strong {
-    color: #28a745;
-    font-size: 28px;
-}
-
-.barra {
-    width: 100%;
-    height: 22px;
-    background: #ddd;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-top: 25px;
-}
-
-#barraFinanciamento {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg,#003b73,#28a745);
-    transition: .4s;
-}
-
-.textoBarra {
-    text-align: center;
-    margin-top: 10px;
-    font-weight: bold;
-    color: #003b73;
-}
-
-@media (max-width:768px){
-
-    .container{
-        padding:15px;
-    }
-
-    header h1{
-        font-size:1.6rem;
-    }
-
-    .box strong{
-        font-size:20px;
-    }
-
-}/* =========================
-   RESPONSIVIDADE GERAL
-========================= */
-
-@media (max-width: 1024px) {
-
-    .container {
-        padding: 15px;
-    }
-
-    .resultado-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:#eef3f8;
+    color:#222;
 }
 
 /* =========================
-   CELULAR
+   CONTAINER
 ========================= */
 
-@media (max-width: 768px) {
-
-    h1 {
-        font-size: 20px;
-        text-align: center;
-    }
-
-    h2 {
-        font-size: 18px;
-    }
-
-    .campo label {
-        font-size: 14px;
-    }
-
-    input, select, button {
-        font-size: 16px;
-        padding: 12px;
-    }
-
-    .resultado-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .box {
-        padding: 12px;
-    }
-
-    .box strong {
-        font-size: 18px;
-    }
-
-    .barra {
-        height: 12px;
-    }
+.container{
+    max-width:1200px;
+    margin:25px auto;
+    padding:20px;
 }
 
 /* =========================
-   CELULAR PEQUENO
+   CABEÇALHO
 ========================= */
 
-@media (max-width: 480px) {
+.header-sharks{
+    background:linear-gradient(135deg,#003b73,#0058a8);
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:22px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,59,115,.18);
+}
 
-    .container {
-        padding: 10px;
-    }
+.header-info h1{
+    color:#fff;
+    font-size:34px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:6px;
+}
 
-    header p {
-        font-size: 12px;
-    }
+.header-info p{
+    color:rgba(255,255,255,.85);
+    font-size:16px;
+}
 
-    button {
-        width: 100%;
-    }
+/* =========================
+   CARDS
+========================= */
 
-    .box strong {
-        font-size: 16px;
-    }
+.card{
+    background:#fff;
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+.card h2{
+    color:#003b73;
+    font-size:22px;
+    margin-bottom:18px;
+    padding-bottom:10px;
+    border-bottom:2px solid #ececec;
+}
+
+/* =========================
+   CAMPO CLIENTE
+========================= */
+
+.campo-inteiro{
+    margin-bottom:20px;
+}
+
+.campo-inteiro label{
+    display:block;
+    margin-bottom:6px;
+    font-size:14px;
+    font-weight:600;
+    color:#555;
+}
+
+.campo-inteiro label small{
+    color:#888;
+    font-weight:500;
+    font-size:12px;
+}
+
+.campo-inteiro input{
+    width:100%;
+    height:46px;
+    padding:12px 14px;
+    border:1px solid #d7d7d7;
+    border-radius:10px;
+    font-size:16px;
+    transition:.2s;
+    background:#fff;
+}
+
+.campo-inteiro input:focus{
+    outline:none;
+    border-color:#003b73;
+    box-shadow:0 0 8px rgba(0,59,115,.15);
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.campos-grid{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:18px;
+}
+
+/* =========================
+   TAMANHO DOS CAMPOS
+========================= */
+
+.campo{
+    grid-column:span 6;
+}
+
+.campo-inteiro{
+    grid-column:1 / -1;
+}
+
+.campo-anual{
+    grid-column:span 4;
+}
+
+.campo-pequeno{
+    grid-column:span 2;
+}
+
+.campo{
+    margin:0;
+}
+
+.campo label{
+    display:block;
+    margin-bottom:6px;
+    font-size:14px;
+    font-weight:600;
+    color:#555;
+}
+
+.campo input{
+    width:100%;
+    height:46px;
+    padding:12px 14px;
+    border:1px solid #d7d7d7;
+    border-radius:10px;
+    font-size:16px;
+    transition:.2s;
+    background:#fff;
+}
+
+.campo input:focus{
+    outline:none;
+    border-color:#003b73;
+    box-shadow:0 0 8px rgba(0,59,115,.15);
+}
+
+/* =========================
+   RESULTADOS
+========================= */
+
+.resultado-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.box{
+    background:#f8f9fc;
+    border-left:5px solid #003b73;
+    border-radius:12px;
+    padding:16px;
+    transition:.2s;
+}
+
+.box:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(0,0,0,.08);
+}
+
+.box span{
+    display:block;
+    font-size:13px;
+    color:#666;
+    margin-bottom:6px;
+}
+
+.box strong{
+    display:block;
+    font-size:24px;
+    color:#003b73;
+    font-weight:700;
+}
+
+.box small{
+    display:block;
+    margin-top:6px;
+    font-size:13px;
+    color:#777;
+}
+
+.destaque{
+    border-left-color:#28a745;
+}
+
+.destaque strong{
+    color:#28a745;
+    font-size:26px;
 }/* =========================
-   BOTÃO IMPRIMIR
+   BARRA DE FINANCIAMENTO
 ========================= */
 
-.acoes {
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
+.barra{
+    width:100%;
+    height:18px;
+    background:#dcdcdc;
+    border-radius:30px;
+    overflow:hidden;
+    margin-top:20px;
 }
 
-#btnImprimir {
-    background: #003b73;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 14px 30px;
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: .2s;
+#barraFinanciamento{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#003b73,#28a745);
+    transition:.4s;
 }
 
-#btnImprimir:hover {
-    background: #00509c;
+.textoBarra{
+    text-align:center;
+    margin-top:10px;
+    font-size:15px;
+    font-weight:700;
+    color:#003b73;
+}
+
+/* =========================
+   BOTÕES DE AÇÃO
+========================= */
+
+.acoes{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    margin-top:22px;
+    flex-wrap:wrap;
+}
+
+.acoes button{
+    border:none;
+    border-radius:10px;
+    padding:13px 26px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+    color:#fff;
+}
+
+#btnWhatsapp{
+    background:#25D366;
+}
+
+#btnWhatsapp:hover{
+    background:#1ebe5d;
+    transform:translateY(-2px);
+}
+
+#btnPdf{
+    background:#c62828;
+}
+
+#btnPdf:hover{
+    background:#b71c1c;
+    transform:translateY(-2px);
+}
+
+#btnImprimir{
+    background:#003b73;
+}
+
+#btnImprimir:hover{
+    background:#0058a8;
+    transform:translateY(-2px);
 }
 
 /* =========================
    IMPRESSÃO
 ========================= */
 
-@media print {
+@media print{
 
-    body {
-        background: #fff;
+    body{
+        background:#fff;
     }
 
-    header p,
-    .acoes {
-        display: none;
+    .header-sharks{
+        box-shadow:none;
     }
 
-    .card {
-        box-shadow: none;
-        border: 1px solid #ddd;
-        page-break-inside: avoid;
+    .acoes{
+        display:none;
     }
 
-    .campo input {
-        border: none;
-        background: transparent;
-        box-shadow: none;
+    .card{
+        box-shadow:none;
+        border:1px solid #ddd;
+        page-break-inside:avoid;
     }
 
-    .barra {
-        margin-top: 20px;
+    .campo input,
+    .campo-inteiro input{
+        border:none;
+        background:transparent;
+        box-shadow:none;
+        height:auto;
+        padding:0;
     }
+
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:992px){
+
+    .container{
+        max-width:900px;
+        padding:18px;
+    }
+
+    .resultado-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media(max-width:768px){
+
+    .container{
+        padding:15px;
+    }
+
+    .header-sharks{
+        padding:22px;
+    }
+
+    .header-info h1{
+        font-size:26px;
+    }
+
+    .header-info p{
+        font-size:14px;
+    }
+
+    .campos-grid{
+        grid-template-columns:1fr;
+    }
+
+    .resultado-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .campo-inteiro{
+        margin-bottom:18px;
+    }
+
+    .box{
+        padding:14px;
+    }
+
+    .box strong{
+        font-size:20px;
+    }
+
+    .acoes{
+        flex-direction:column;
+    }
+
+    .acoes button{
+        width:100%;
+    }
+
+}
+
+/* =========================
+   CELULARES PEQUENOS
+========================= */
+
+@media(max-width:480px){
+
+    .container{
+        padding:10px;
+    }
+
+    .header-info h1{
+        font-size:22px;
+    }
+
+    .header-info p{
+        font-size:13px;
+    }
+
+    .card h2{
+        font-size:18px;
+    }
+
+    .campo label,
+    .campo-inteiro label{
+        font-size:13px;
+    }
+
+    .campo input,
+    .campo-inteiro input{
+        height:44px;
+        font-size:15px;
+    }
+
+    .box{
+        padding:12px;
+    }
+
+    .box strong{
+        font-size:18px;
+    }
+
+    .barra{
+        height:14px;
+    }
+
+}/* =========================
+   MODAL WHATSAPP
+========================= */
+
+.modalWhatsapp{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    display:none;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(4px);
+
+    z-index:9999;
+}
+
+.modalWhatsapp.ativo{
+    display:flex;
+}
+
+.modalWhatsappConteudo{
+
+    width:100%;
+    max-width:420px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:28px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+
+    animation:modalEntrada .2s ease;
+
+}
+
+@keyframes modalEntrada{
+
+    from{
+
+        opacity:0;
+        transform:translateY(15px) scale(.97);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+.modalWhatsappConteudo input{
+
+    width:100%;
+    height:56px;
+
+    border:1px solid #d7d7d7;
+    border-radius:12px;
+
+    padding:0 18px;
+
+    font-size:18px;
+
+    transition:.2s;
+
+}
+
+.modalWhatsappConteudo input:focus{
+
+    outline:none;
+
+    border-color:#25D366;
+
+    box-shadow:0 0 0 4px rgba(37,211,102,.15);
+
+}
+
+.modalBotoes{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+    margin-top:22px;
+
+}
+
+.modalBotoes button{
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:12px 24px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.2s;
+
+}
+
+#btnCancelarWhatsapp{
+
+    background:#ececec;
+    color:#333;
+
+}
+
+#btnCancelarWhatsapp:hover{
+
+    background:#dddddd;
+
+}
+
+#btnEnviarWhatsapp{
+
+    background:#25D366;
+    color:#fff;
+
+}
+
+#btnEnviarWhatsapp:hover{
+
+    background:#1ebe5d;
+
+}
+#btnEnviarWhatsapp:disabled{
+
+    opacity: .75;
+
+    cursor: not-allowed;
 
 }
